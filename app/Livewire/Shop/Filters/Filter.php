@@ -21,6 +21,7 @@ class Filter extends Component
     }
 
     protected function applyFilters(array $filters):void{
+       // dd($filters);
         $this->dispatch('filters-updated',filters:$filters)->to(ProductsList::class);
     }
 

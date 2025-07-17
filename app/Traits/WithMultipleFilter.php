@@ -27,7 +27,8 @@ trait WithMultipleFilter
         $filters = [
             Str::of(class_basename($this->eloquentModel))->lower()->toString() => $this->selectedModels,
         ];
-       // dump($filters);
+        ///ray($filters);
+
 
         $this->applyFilters($filters);
     }
