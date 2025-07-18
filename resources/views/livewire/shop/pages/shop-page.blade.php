@@ -32,7 +32,6 @@
                 <!-- Card de producto (ejemplo) -->
 
                     {{-- Usás el dropdown aquí si querés detalle expandible --}}
-                    <x-product-card :product="$product" />
 
             </div>
         </div>

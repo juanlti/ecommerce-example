@@ -1,50 +1,56 @@
-<div class="bg-red-200 w-full p-4"> {{-- Este es el contenedor padre --}}
-    <flux:dropdown class="w-full">
-        <flux:button icon:trailing="chevron-down" class="w-full">
-            Options
-        </flux:button>
+<div class="w-full p-4">
 
-        <flux:menu
-            class="w-1/2 bg-white shadow-xl rounded-lg overflow-hidden overflow-y-auto max-h-[400px]"
-            style="min-width: 0"
-        >
-            {{-- Imagen --}}
-            <flux:menu.item class="p-0">
-                <img src="{{$product->image}}" alt="{{$product->name}}" class="object-cover rounded-t-lg"/>
-            </flux:menu.item>
-
-            {{-- Título --}}
-            <flux:menu.item class="px-4 py-2 border-b">
-                <h5 class="text-lg font-semibold">{{$product->name}}</h5>
-            </flux:menu.item>
-
-            <flux:menu.separator/>
-
-            {{-- Detalles --}}
-            @foreach([
-                'Category' => $product->category->name,
-                'Color' => $product->color->name,
-                'Size' => $product->size->name
-            ] as $label => $value)
-                <flux:menu.item class="px-4 py-2 flex justify-between border-b text-sm text-gray-600">
-                    <span class="text-gray-500 font-medium">{{ $label }}</span>
-                    <span>{{ $value }}</span>
-                </flux:menu.item>
-            @endforeach
+            {{-- Tarjeta --}}
+            <div class="rounded-lg">
+                {{-- Imagen del producto --}}
+                <img src="https://previews.123rf.com/images/myvector/myvector1606/myvector160600281/57852872-product-not-available-icon.jpg"
+                     alt="{{ $product->name }}"
+                     class="w-48 h-48 object-cover"/>
 
 
-            <flux:menu.item class="px-4 py-2 flex items-center gap-1 border-t">
-                <div class="card-footer">
-                    <span> valoracion</span>
-                    <div class="d-flex justify-content-between">
-                        @for ($i = 1; $i <= 5; $i++)
-                            <i class="fas fa-star {{$product->reviews()->avg(('rating'), 1) ? 'text-yellow-400' : 'text-gray-300' }}"></i>
-                        @endfor
+                {{-- Contenido --}}
+                <div class="p-4">
+                    {{-- Nombre del producto --}}
+                    <h5 class="text-lg font-semibold text-gray-900 mb-4">{{ $product->name }}</h5>
+
+                    {{-- Atributos estilo tabla --}}
+                    <div class="text-sm text-gray-700 space-y-2">
+                        <div class="flex justify-between border-t pt-2">
+                            <span class="font-semibold">Categoría</span>
+                            <span>{{ $product->category->name }}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="font-semibold">Color</span>
+                            <span>{{ $product->color->name }}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="font-semibold">Tamaño</span>
+                            <span>{{ $product->size->name }}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="font-semibold">Precio</span>
+                            <span>{{ $product->price }} €</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="font-semibold">Marca</span>
+                            <span>{{ $product->brand->name }}</span>
+                        </div>
+
+                        {{-- Valoración --}}
+                        @php
+                            $avgRating = round($product->reviews()->avg('rating'));
+                        @endphp
+                        <div class="flex justify-between items-center pt-2 border-t">
+                            <span class="font-semibold">Valoración</span>
+                            <div class="flex items-center gap-1">
+                                @for ($i = 1; $i <= 5; $i++)
+                                    <i class="fas fa-star {{ $i <= $avgRating ? 'text-yellow-400' : 'text-gray-300' }}"></i>
+                                @endfor
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </flux:menu.item>
+            </div>
 
 
-        </flux:menu>
-    </flux:dropdown>
 </div>

@@ -6,17 +6,18 @@ use App\Models\Product;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Illuminate\View\View;
+
 class ShopPage extends Component
 {
 
-    public function resetFilters():void{
+    public function resetFilters(): void
+    {
 
     }
-    public function render():View
+
+    public function render(): View
     {
-        $product= Product::first();
-        return view('livewire.shop.pages.shop-page',[
-            'product'=>$product
-        ]);
+
+        return view('livewire.shop.pages.shop-page');
     }
 }

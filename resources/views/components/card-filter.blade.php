@@ -1,7 +1,11 @@
-<div class="card">
-    <h5 class="card-header bg-white fw-bolder">{{ $title }}</h5>
+<div class="shadow-md rounded-lg border border-gray-200">
+    <!-- Encabezado -->
+    <div class="border-b px-6 py-4">
+        <h5 class="text-lg font-bold text-gray-800">{{ $title }}</h5>
+    </div>
 
-    <div class="card-body">
+    <!-- Cuerpo -->
+    <div class="px-6 py-4">
         {{ $slot }}
     </div>
 </div>
