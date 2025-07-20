@@ -32,4 +32,6 @@ trait WithMultipleFilter
 
         $this->applyFilters($filters);
     }
+
+
 }

@@ -2,9 +2,16 @@
 
 namespace App\Livewire\Shop\Lists;
 
+use App\Enums\Filters\ShopFilter;
+use App\Livewire\Shop\Filters\PerPageFilter;
 use App\Models\Product;
+use App\Traits\WithModelsFilter;
+use App\Traits\WithMultipleFilter;
+use Illuminate\Pipeline\Pipeline;
+use Illuminate\Process\Pipe;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
@@ -33,36 +40,60 @@ class ProductsList extends Component
 
     }
 
+    #[On('filters-reset')]
+    public function onResetFilters():void{
+        $this->resetFilters();
+        $this->dispatch('shop-reset-filters');
+    }
+
+    #[On('filters-updated')]
+    public function onFiltersUpdated(mixed $filters): void
+    {
+
+
+        $key = key($filters);
+        $value = $filters[$key];
+
+
+        session()->put('shop:' . $key, $value);
+        //dd(session('shop:'.$key));
+        //  ray();
+        $this->gotoPage(1);
+
+    }
+
+
     private function filters(): array
     {
 
-        return collect($this->filters)->map(fn($filter, $key) => session(key: 'shop' . $key, default: $filter))->toArray();
+        return collect($this->filters)->map(fn($filter, $key) => session(key: 'shop:' . $key, default: $filter))->toArray();
     }
 
     public function render(): View
     {
-        return view('livewire.shop.lists.products-list',['products'=>$this->getProducts()]);
+        return view('livewire.shop.lists.products-list', ['products' => $this->getProducts()]);
     }
 
     private function getProducts()
     {
-        // 1. Habilitás el log de consultas
-      //  \DB::enableQueryLog();
 
-        // 2. Ejecutás tu consulta (con eager loading y paginación)
-        $products = Product::query()->with([
+        $query = Product::query()->with([
             'brand:id,name',
             'category:id,name',
             'color:id,name',
             'size:id,name',
             'reviews:id,product_id,rating',
-        ])->paginate(session(key: 'perPage', default: 4));
-
-        // 3. Mostrás el log de las consultas realizadas
-        //dd(DB::getQueryLog());
-
-        // 4. (Opcionalmente, si querés devolver los productos en vez de cortar con `dd`)
-        return $products;
+        ]);
+        $query = app(Pipeline::class)
+            ->send($query)
+            ->through(
+                collect($this->filters())
+                    ->map(fn($filter, $value) => ShopFilter::from($value)->create($filter))
+                    ->values()
+                    ->all(),
+            )
+            ->thenReturn();
+        return $query->paginate(session(key: 'shop:perPage', default: PerPageFilter::DEFAULT_PER_PAGE));
     }
 
 

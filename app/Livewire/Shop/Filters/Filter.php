@@ -9,7 +9,7 @@ use Illuminate\View\View;
 use Livewire\Component;
 use phpDocumentor\Reflection\Types\ClassString;
 
-class Filter extends Component
+abstract class Filter extends Component
 {
     public string $title;
     protected string $eloquentModel;
