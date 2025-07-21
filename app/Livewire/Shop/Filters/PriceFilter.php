@@ -2,11 +2,28 @@
 
 namespace App\Livewire\Shop\Filters;
 
+use App\Traits\WithSingleFilter;
+use Illuminate\View\View;
 use Livewire\Component;
 
-class PriceFilter extends Component
+class PriceFilter extends Filter
 {
-    public function render()
+
+    use WithSingleFilter;
+
+    public string $title='Precio';
+
+    public array $filter = [
+        'price' => [
+            'min' => 0,
+            'max' => 0,
+
+
+        ],
+
+    ];
+
+    public function render(): View
     {
         return view('livewire.shop.filters.price-filter');
     }

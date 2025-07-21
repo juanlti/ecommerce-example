@@ -25,7 +25,8 @@ class ProductsList extends Component
 
     private array $filters = [
         'category' => [],
-        'search' => ''
+        'search' => '',
+        'price' => [],
     ];
 
 
@@ -70,6 +71,7 @@ class ProductsList extends Component
     private function filters(): array
     {
 
+        info('detecta los filtros disponibles que se van aplicar en Pipeline ', [$this->filters]);
 
         return collect($this->filters)->map(fn($filter, $key) => session(key: 'shop:' . $key, default: $filter))->toArray();
     }
@@ -83,6 +85,7 @@ class ProductsList extends Component
     {
 
 
+        /// info('se ejecuta con el filtro price ?',[session('shop:')]);
         $query = Product::query()->with([
             'brand:id,name',
             'category:id,name',

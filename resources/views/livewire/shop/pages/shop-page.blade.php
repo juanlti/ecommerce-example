@@ -8,6 +8,7 @@
 
 
                 <livewire:shop.filters.category-filter/>
+                <livewire:shop.filters.price-filter/>
             </div>
         </div>
 
@@ -22,6 +23,7 @@
                 <div class="flex flex-wrap items-center gap-4">
                     <livewire:shop.filters.per-page-filter />
                     <livewire:shop.filters.search-filter />
+
                 </div>
             </div>
 
