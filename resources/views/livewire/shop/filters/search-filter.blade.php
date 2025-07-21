@@ -1,3 +1,5 @@
 <div>
-    {{-- Nothing in the world is as soft and yielding as water. --}}
+
+    <flux:input icon="magnifying-glass" placeholder="Search" wire:model.live.debounce500="filter.search"/>
+
 </div>

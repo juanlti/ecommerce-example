@@ -15,6 +15,7 @@ trait WithSingleFilter
 
     public function updatedFilter(): void
     {
+       // dd("metodo de traits");
         $this->applyFilters($this->filter);
     }
 

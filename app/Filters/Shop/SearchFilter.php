@@ -6,7 +6,7 @@ use App\Filters\Filter;
 use Closure;
 use Illuminate\Database\Eloquent\Builder;
 
-final class CategoryFilter extends Filter
+final class SearchFilter extends Filter
 {
 
 
@@ -19,8 +19,12 @@ final class CategoryFilter extends Filter
             return $next($items);
         }
 
-        $items->whereIn('category_id', $this->filter);
+        info('search',[$this->filter]);
+        //$items->where(column: 'name', operator: 'like', value: '%{$this->filter}%');
+        $items->where('name', 'like', "%{$this->filter}%");
+        //info('search (Despues) ',[$items]);
 
         return $next($items);
     }
+
 }

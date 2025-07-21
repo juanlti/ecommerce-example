@@ -22,6 +22,7 @@ abstract class Filter extends Component
 
     protected function applyFilters(array $filters):void{
        // dd($filters);
+       // dd("metodo de Filter");
         $this->dispatch('filters-updated',filters:$filters)->to(ProductsList::class);
     }
 

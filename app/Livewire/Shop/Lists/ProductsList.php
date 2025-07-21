@@ -25,6 +25,7 @@ class ProductsList extends Component
 
     private array $filters = [
         'category' => [],
+        'search' => ''
     ];
 
 
@@ -41,7 +42,8 @@ class ProductsList extends Component
     }
 
     #[On('filters-reset')]
-    public function onResetFilters():void{
+    public function onResetFilters(): void
+    {
         $this->resetFilters();
         $this->dispatch('shop-reset-filters');
     }
@@ -53,6 +55,8 @@ class ProductsList extends Component
 
         $key = key($filters);
         $value = $filters[$key];
+
+        //dd('informacion del input search ---> key '.$value .' values '.$value);
 
 
         session()->put('shop:' . $key, $value);
@@ -66,6 +70,7 @@ class ProductsList extends Component
     private function filters(): array
     {
 
+
         return collect($this->filters)->map(fn($filter, $key) => session(key: 'shop:' . $key, default: $filter))->toArray();
     }
 
@@ -76,6 +81,7 @@ class ProductsList extends Component
 
     private function getProducts()
     {
+
 
         $query = Product::query()->with([
             'brand:id,name',
@@ -88,11 +94,13 @@ class ProductsList extends Component
             ->send($query)
             ->through(
                 collect($this->filters())
-                    ->map(fn($filter, $value) => ShopFilter::from($value)->create($filter))
+                    ->map(fn($value, $key) => ShopFilter::from($key)->create($value))
                     ->values()
                     ->all(),
             )
             ->thenReturn();
+
+        info('search (pipeline) ', [$query->get()]);
         return $query->paginate(session(key: 'shop:perPage', default: PerPageFilter::DEFAULT_PER_PAGE));
     }
 
