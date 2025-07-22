@@ -10,6 +10,7 @@
                 <livewire:shop.filters.category-filter/>
                 <livewire:shop.filters.price-filter/>
                 <livewire:shop.filters.rating-filter/>
+                <livewire:shop.filters.color-filter/>
 
             </div>
         </div>

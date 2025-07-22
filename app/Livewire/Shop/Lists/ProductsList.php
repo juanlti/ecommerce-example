@@ -27,7 +27,9 @@ class ProductsList extends Component
         'category' => [],
         'search' => '',
         'price' => [],
-        'rating'=>null,
+        'rating' => [],
+        'color' => []
+
 
     ];
 
@@ -58,10 +60,11 @@ class ProductsList extends Component
 
 
         $key = key($filters);
+
         $value = $filters[$key];
 
 
-       // dd('informacion del input rating ---> key '.$key .' values '.$value);
+        ///dd('informacion del input color ---> key '.$key .' values '.implode($value));
 
 
         session()->put('shop:' . $key, $value);
@@ -74,11 +77,22 @@ class ProductsList extends Component
 
     private function filters(): array
     {
+        $filters = collect($this->filters)
+            ->map(function ($filter, $key) {
+                $value = session('shop:' . $key, $filter);
 
-        info('detecta los filtros disponibles que se van aplicar en Pipeline ', [$this->filters]);
+                if (is_array($value)) {
+                    $value = array_map(fn($v) => is_numeric($v) ? (int)$v : $v, $value);
+                }
+                return $value;
 
-        return collect($this->filters)->map(fn($filter, $key) => session(key: 'shop:' . $key, default: $filter))->toArray();
+            })->toArray();
+
+        info('Filtros construidos', [$filters]);
+
+        return $filters;
     }
+
 
     public function render(): View
     {
@@ -88,7 +102,6 @@ class ProductsList extends Component
     private function getProducts()
     {
 
-
         /// info('se ejecuta con el filtro price ?',[session('shop:')]);
         $query = Product::query()->with([
             'brand:id,name',
@@ -97,6 +110,8 @@ class ProductsList extends Component
             'size:id,name',
             'reviews:id,product_id,rating',
         ]);
+        info('estoy get productos ',[$this->filters()]);
+
         $query = app(Pipeline::class)
             ->send($query)
             ->through(

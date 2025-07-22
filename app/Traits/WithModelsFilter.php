@@ -4,7 +4,7 @@ namespace App\Traits;
 
 use App\Livewire\Shop\Filters\Filter;
 use Illuminate\Support\Collection;
-use Livewire\Attributes\On;
+
 
 /**
  *

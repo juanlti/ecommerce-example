@@ -15,7 +15,7 @@ trait WithSingleFilter
 
     public function updatedFilter(): void
     {
-       // dd("metodo de traits");
+      // dd("metodo de traits color selecionado ");
         $this->applyFilters($this->filter);
     }
 

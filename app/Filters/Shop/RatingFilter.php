@@ -15,7 +15,7 @@ final class RatingFilter extends Filter
         //dd("hola");
 
 
-        info('estoy en rating fliter ', [$this->filter]);
+       // info('estoy en rating fliter ', [$this->filter]);
 
 
         if (!$this->filter) {
@@ -39,7 +39,7 @@ final class RatingFilter extends Filter
         });
 
 
-        dd("holaaa def23f32");
+     //   dd("holaaa def23f32");
 
         return $next($items);
     }
