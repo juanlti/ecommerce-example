@@ -9,6 +9,8 @@
 
                 <livewire:shop.filters.category-filter/>
                 <livewire:shop.filters.price-filter/>
+                <livewire:shop.filters.rating-filter/>
+
             </div>
         </div>
 

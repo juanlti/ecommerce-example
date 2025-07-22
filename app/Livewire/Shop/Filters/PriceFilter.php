@@ -4,7 +4,7 @@ namespace App\Livewire\Shop\Filters;
 
 use App\Traits\WithSingleFilter;
 use Illuminate\View\View;
-use Livewire\Component;
+
 
 class PriceFilter extends Filter
 {

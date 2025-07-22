@@ -27,6 +27,8 @@ class ProductsList extends Component
         'category' => [],
         'search' => '',
         'price' => [],
+        'rating'=>null,
+
     ];
 
 
@@ -37,6 +39,7 @@ class ProductsList extends Component
         collect($this->filters)->each(fn($filter, $key) => session()->forget('shop:' . $key));
 
         session()->forget('shop:perPage');
+
 
         $this->gotoPage(1);
 
@@ -57,7 +60,8 @@ class ProductsList extends Component
         $key = key($filters);
         $value = $filters[$key];
 
-        //dd('informacion del input search ---> key '.$value .' values '.$value);
+
+       // dd('informacion del input rating ---> key '.$key .' values '.$value);
 
 
         session()->put('shop:' . $key, $value);
