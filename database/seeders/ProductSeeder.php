@@ -28,7 +28,7 @@ class ProductSeeder extends Seeder
         // rating 5
         $macbookPro->reviews()->createMany(
             Review::factory()->count(10)->make([
-                'user_id' => random_int(1, 10),
+                'user_id' => random_int(1, 5),
                 'rating' => 5
             ])->toArray()
         );
@@ -47,7 +47,7 @@ class ProductSeeder extends Seeder
         // rating between 4 and 5
         $macbookPro->reviews()->createMany(
             Review::factory()->count(10)->make([
-                'user_id' => random_int(1, 10),
+                'user_id' => random_int(1, 5),
                 'rating' => random_int(4, 5),
             ])->toArray()
         );
@@ -66,7 +66,7 @@ class ProductSeeder extends Seeder
         // rating between 4 and 5
         $iPhone->reviews()->createMany(
             Review::factory()->count(10)->make([
-                'user_id' => random_int(1, 10),
+                'user_id' => random_int(1, 5),
                 'rating' => random_int(4, 5),
             ])->toArray()
         );
@@ -84,7 +84,7 @@ class ProductSeeder extends Seeder
 
         $iPhone->reviews()->createMany(
             Review::factory()->count(10)->make([
-                'user_id' => random_int(1, 10),
+                'user_id' => random_int(1, 5),
                 'rating' => random_int(4, 5),
             ])->toArray()
         );
@@ -103,7 +103,7 @@ class ProductSeeder extends Seeder
         // rating between 3 and 5
         $iPad->reviews()->createMany(
             Review::factory()->count(10)->make([
-                'user_id' => random_int(1, 10),
+                'user_id' => random_int(1, 5),
                 'rating' => random_int(3, 5),
             ])->toArray()
         );
@@ -122,7 +122,7 @@ class ProductSeeder extends Seeder
         // rating between 3 and 5
         $iPad->reviews()->createMany(
             Review::factory()->count(10)->make([
-                'user_id' => random_int(1, 10),
+                'user_id' => random_int(1, 5),
                 'rating' => random_int(3, 5),
             ])->toArray()
         );
@@ -141,7 +141,7 @@ class ProductSeeder extends Seeder
         // rating between 2 and 4
         $airPods->reviews()->createMany(
             Review::factory()->count(10)->make([
-                'user_id' => random_int(1, 10),
+                'user_id' => random_int(1, 5),
                 'rating' => random_int(3, 5),
             ])->toArray()
         );
@@ -162,7 +162,7 @@ class ProductSeeder extends Seeder
         $galaxy->reviews()->createMany(
 
             Review::factory()->count(10)->make([
-                'user_id' => random_int(1, 10),
+                'user_id' => random_int(1, 5),
                 'rating' => random_int(3, 5),
             ])->toArray()
         );
@@ -182,7 +182,7 @@ class ProductSeeder extends Seeder
         // rating between 4 and 5
         $lg->reviews()->createMany(
             Review::factory()->count(10)->make([
-                'user_id' => random_int(1, 10),
+                'user_id' => random_int(1, 5),
                 'rating' => random_int(4, 5),
             ])->toArray()
         );
@@ -201,7 +201,7 @@ class ProductSeeder extends Seeder
         // rating between 4 and 5
         $iMac->reviews()->createMany(
             Review::factory()->count(10)->make([
-                'user_id' => random_int(1, 10),
+                'user_id' => random_int(1, 5),
                 'rating' => random_int(4, 5),
             ])->toArray()
         );
@@ -220,7 +220,7 @@ class ProductSeeder extends Seeder
         // rating between 2 and 4
         $amd->reviews()->createMany(
             Review::factory()->count(10)->make([
-                'user_id' => random_int(1, 10),
+                'user_id' => random_int(1, 5),
                 'rating' => random_int(2, 4),
             ])->toArray()
         );
@@ -240,7 +240,7 @@ class ProductSeeder extends Seeder
         // rating between 1 and 3
         $i9->reviews()->createMany(
             Review::factory()->count(10)->make([
-                'user_id' => random_int(1, 10),
+                'user_id' => random_int(1, 5),
                 'rating' => random_int(1, 3),
             ])->toArray()
         );
