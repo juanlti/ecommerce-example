@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Todos;
 
+use App\Models\Todo;
+use Illuminate\Contracts\View\View;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -11,13 +13,16 @@ class TodoList extends Component
 
     public ?int $todoToDelete=null;
 
-    public function edit(int $id):void
+    public function edit(Todo $todo):void
     {
-        //redirect page edition
+      $this->redirect(route('todos.edit',['todo'=>$todo]));
     }
 
-    public function toggle(int $id):void
+    public function toggle(Todo $todo):void
     {
+
+       $todo->done=!$todo->done;
+       $todo->save();
 
     }
     public function preDelete(int $id):void
@@ -31,7 +36,7 @@ class TodoList extends Component
     }
 
 
-    public function render()
+    public function render():View
     {
         $todos=auth()->user()->todos()->paginate(10);
         return view('livewire.todos.todo-list',['todos'=>$todos]);
