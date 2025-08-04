@@ -23,7 +23,7 @@
                 </button>
 
                 <button
-                    wire:click="preDelete({{ $todo->id }})"
+                    wire:click="preDelete({{ $todo }})"
                     class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
                 >
                     Eliminar
@@ -37,6 +37,11 @@
     @empty
         <p class="text-lg"> No hay tareas a realizar</p>
     @endforelse
+
+    <!-- delete modal -->
+        <livewire:todos.confirm-todo-deletion :show="!!$todoToDelete"/>
+
+
 
     {{ $todos->links() }}
 </div>

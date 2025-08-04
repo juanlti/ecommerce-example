@@ -12,7 +12,7 @@ final class ColorFilter extends Filter
 
     public function handle(Builder $items, Closure $next): Builder
     {
-        dd("estoy en colorFilter");
+        //dd("estoy en colorFilter");
         info('Valor recibido en ColorFilter', ['filter' => $this->filter]);
 
         if (!$this->filter) {
