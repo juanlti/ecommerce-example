@@ -6,7 +6,7 @@
             </label>
 
             <input
-                wire:model="title"
+                wire:model="form.title"
                 type="text"
                 id="title"
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('title') border-red-500 @enderror"
@@ -23,7 +23,7 @@
             </label>
 
             <textarea
-                wire:model="description"
+                wire:model="form.description"
                 id="description"
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('description') border-red-500 @enderror"></textarea>
 
@@ -38,7 +38,7 @@
             </label>
 
             <input
-                wire:model="done"
+                wire:model="form.done"
                 type="checkbox"
                 id="done"
             />
@@ -49,7 +49,7 @@
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         >
 
-            Crear
+            {{$textButton}}
         </button>
     </form>
 

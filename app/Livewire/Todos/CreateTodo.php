@@ -2,21 +2,21 @@
 
 namespace App\Livewire\Todos;
 
-use App\Models\Todo;
+use App\Livewire\Forms\Todo\TodoForm;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
 class CreateTodo extends Component
 {
-    public string $title = '';
-    public string $description = '';
-    public bool $done = false;
 
-    public ?string $textButton = '';
+    public TodoForm $form;
+
+
 
     public function save(): void
     {
-        Todo::create($this->only(['title', 'description', 'done']));
+       // Todo::create($this->only(['title', 'description', 'done']));
+        $this->form->create();
 
         session()->flash('status', 'La tarea se ha creado correctamente');
         $this->redirect(route('todos.index'));
@@ -26,6 +26,6 @@ class CreateTodo extends Component
 
     public function render(): View
     {
-        return view('livewire.todos.create-todo');
+        return view('livewire.todos.todo-form',['textButton'=>__('Crear')]);
     }
 }
