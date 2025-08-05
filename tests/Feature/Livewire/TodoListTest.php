@@ -45,3 +45,29 @@ test('todo list component renders with todos', function () {
 })->group('todo-list', 'todos');
 
 
+test('todo list pagination works', function () {
+    $user = User::factory()->create([
+        'name' => 'user test pagination ',
+        'email' => 'pagination@prueba.com',
+    ]);
+    $action = Livewire::actingAs($user);
+    $user->todos()->createMany(
+        collect(range(1, 50))->map(fn($i) => [
+            'title' => "Comprar pan {$i}"
+
+        ])->toArray()
+    );
+    $action
+        ->test(TodoList::class)
+        ->assertSee('Comprar pan 1')
+        ->assertSee('Comprar pan 10')
+        ->assertDontSee('Comprar pan 15')
+        ->call('nextPage')
+        ->assertSee('Comprar pan 15')
+        ->assertDontSee('Comprar pan 10')
+        ->assertDontSee('Comprar pan 30')
+        ->call('previousPage')
+        ->assertSee('Comprar pan 10')
+        ->assertDontSee('Comprar pan 15');
+
+})->group('todo-list', 'todos');
