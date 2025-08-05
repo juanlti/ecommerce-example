@@ -71,3 +71,26 @@ test('todo list pagination works', function () {
         ->assertDontSee('Comprar pan 15');
 
 })->group('todo-list', 'todos');
+
+test('todo list component toggles todo', function () {
+    $user = User::factory()->create([
+        'name' => 'user test toggles ',
+        'email' => 'toggles@prueba.com',
+    ]);
+
+    $action = Livewire::actingAs($user);
+    $todo = $user->todos()->create([
+        'title' => 'Comprar pan',
+        'description' => 'Ir a la panaderia y comprar pan',
+        'done' => false,
+    ]);
+    $action
+        ->test(TodoList::class)
+        ->assertSee('Comprar pan')
+        ->assertSee('Ir a la panaderia y comprar pan')
+        ->assertSee('Marcar como completada')
+        ->call('toggle', $todo)
+        ->assertSee('Marcar como no completada');
+
+
+})->group('todo-list', 'todos');
