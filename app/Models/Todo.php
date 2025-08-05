@@ -16,6 +16,7 @@ class Todo extends Model
 
     protected static function boot(): void
     {
+        //el metodo boot() sirve para asignar de manera automatica la nueva tarea al usuario registrado en ese momento
         parent::boot();
 
         static::creating(function ($todo) {
