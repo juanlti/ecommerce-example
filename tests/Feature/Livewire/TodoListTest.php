@@ -7,6 +7,7 @@ test('example', function () {
 });
 */
 
+use App\Livewire\Todos\ConfirmTodoDeletion;
 use App\Livewire\Todos\TodoList;
 use App\Models\User;
 use Livewire\Livewire;
@@ -94,3 +95,44 @@ test('todo list component toggles todo', function () {
 
 
 })->group('todo-list', 'todos');
+
+test('todo list component deletes todo ', function () {
+
+    $user = User::factory()->create([
+        'name' => 'Juan',
+        'email' => 'delete@prueba.com'
+    ]);
+    $action = Livewire::actingAs($user);
+    $todo = $user->todos()->create([
+        'id' => 1500,
+        'title' => 'Comprar pan',
+        'description' => 'Ir a la panaderia y comprar pan',
+        'done' => false,
+    ]);
+
+    // 1. Test UI - Usuario Juan ve la Tarea en  TodoList.
+    $action
+        ->test(TodoList::class)
+        ->assertSee('Comprar pan')
+        ->assertSee('Ir a la panaderia y comprar pan')
+        ->call('preDelete', $todo)
+        ->assertDispatched('open-modal', 'confirm-todo-deletion')
+        /*
+        // 2. Usuario confirma en el modal -> emite el evento
+        $action
+            ->test(ConfirmTodoDeletion::Class)
+            ->call('delete')
+            ->assertDispatched('delete-todo');
+
+        // 3. TodoList reacciona al evento y elimina la tarea
+        */
+
+        // Simulacion que el otro componente (ConfirmTodoDeletion::class), emite el evento
+        ->dispatch('delete-todo')
+        ->assertRedirect(route('todos.index'));
+    $this->assertDatabaseMissing('todos', [
+        'id' => $todo->id,
+    ]);
+
+
+})->group('todo-list', 'todo');
