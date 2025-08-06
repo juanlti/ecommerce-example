@@ -2,7 +2,7 @@
     <form wire:submit="save">
         <div class="mb-4">
             <label for="title" class="block text-gray-700 text-sm font-bold mb-2">
-                Título
+                Titulo
             </label>
 
             <input
@@ -19,7 +19,7 @@
 
         <div class="mb-4">
             <label for="description" class="block text-gray-700 text-sm font-bold mb-2">
-                Descripción
+                Descripcion
             </label>
 
             <textarea

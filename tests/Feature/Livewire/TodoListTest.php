@@ -104,7 +104,6 @@ test('todo list component deletes todo ', function () {
     ]);
     $action = Livewire::actingAs($user);
     $todo = $user->todos()->create([
-        'id' => 1500,
         'title' => 'Comprar pan',
         'description' => 'Ir a la panaderia y comprar pan',
         'done' => false,
