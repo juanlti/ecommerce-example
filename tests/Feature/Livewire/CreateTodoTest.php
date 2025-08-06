@@ -11,7 +11,7 @@ test('example', function () {
 use App\Livewire\Todos\CreateTodo;
 use App\Models\User;
 
-test('todo create component renders', function () {
+test('create todo  component renders', function () {
 
     $user = User::factory()->create([
         'name' => 'Juan',
